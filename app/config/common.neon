@@ -19,3 +19,6 @@ di:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+
+includes:
+    - services.neon

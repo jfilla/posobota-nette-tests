@@ -1,0 +1,10 @@
+# Generated file, do not modify directly!
+services:
+	- factory: App\Models\Calculator
+	  inject: true
+	- implement: App\Presenters\Components\Order\ControlFactory
+	  inject: true
+	- factory: App\Presenters\Components\Order\FormFactory
+	  inject: true
+	- factory: App\Presenters\Components\Order\FormHandler
+	  inject: true

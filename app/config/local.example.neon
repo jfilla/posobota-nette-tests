@@ -1,0 +1,6 @@
+parameters:
+    database:
+        host: localhost
+        name: posobota_nette
+        user: root
+        password: root

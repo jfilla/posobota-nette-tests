@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Wavevision\DIServiceAnnotation\Configuration;
+use Wavevision\DIServiceAnnotation\Runner;
+use Wavevision\Utils\Path;
+
+$autoload = __DIR__ . '/../vendor/autoload.php';
+require $autoload;
+$rootDir = Path::create(__DIR__, '..');
+$testConfig = $rootDir->path('tests', 'config');
+$tempDir = $rootDir->string('temp');
+$appDir = $rootDir->path('app');
+Runner::run(
+    (new Configuration($appDir->string(), $appDir->string('config', 'services.neon'))),
+    (new Configuration($rootDir->string('tests'), $testConfig->string('services.neon')))
+);
