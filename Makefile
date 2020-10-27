@@ -7,9 +7,11 @@ php=php
 point=wavevision/point
 src=app
 temp=temp
+console=bin/console
 testConsole=tests/bin/console
 tests=tests
 dirs:=$(src) $(tests)
+config=app/config/local.neon
 
 all:
 	 @$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -17,9 +19,12 @@ all:
 # Setup
 
 init: build
-	cp -n $(configExample) app/config/local.neon
+	cp -n $(configExample) $(config)
 	#cp -n $(configExample) tests/config/local.neon
-	@echo "update configuration files as you see fit"
+	@echo "update configuration file $(config) then run 'make setup'"
+
+setup: database-reset
+
 
 build: composer
 
@@ -36,13 +41,13 @@ di:
 	bin/extract-services
 
 database-create:
-	$(bin)/create-database examples/config/local.neon
+	$(bin)/create-database app/config/local.neon
 
 database-schema:
-	$(examplesConsole) orm:schema-tool:create
+	$(console) orm:schema-tool:create
 
 database-fixtures:
-	$(examplesConsole) examples:insert-fixtures
+	$(console) app:insert-fixtures
 
 database-reset: reset database-create database-schema database-fixtures
 

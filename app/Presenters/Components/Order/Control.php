@@ -13,6 +13,7 @@ class Control extends BaseControl
 {
 
 	use InjectFormFactory;
+	use InjectFormHandler;
 
 	public function render(): void
 	{
@@ -21,7 +22,12 @@ class Control extends BaseControl
 
 	protected function createComponentForm(): Form
 	{
-		return $this->formFactory->create();
+		$form = $this->formFactory->create();
+		$form->onSuccess[] = function (\Nette\Forms\Form $form): void {
+			$this->formHandler->process($form);
+			$this->redirect('this');
+		};
+		return $form;
 	}
 
 }

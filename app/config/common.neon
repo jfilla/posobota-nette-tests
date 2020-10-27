@@ -1,4 +1,5 @@
 parameters:
+    quantityCoefficient: -0.1
 
 
 application:
@@ -22,3 +23,4 @@ services:
 
 includes:
     - services.neon
+    - database.neon

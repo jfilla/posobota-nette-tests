@@ -2,9 +2,13 @@
 
 namespace App\Presenters\Components\Order;
 
+use App\Entities\Item;
+use App\Models\InjectItemRepository;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
+use Wavevision\Utils\Arrays;
+use function sprintf;
 
 /**
  * @DIService(generateInject=true)
@@ -13,6 +17,7 @@ class FormFactory
 {
 
 	use SmartObject;
+	use InjectItemRepository;
 
 	public const QUANTITY = 'quantity';
 
@@ -26,9 +31,18 @@ class FormFactory
 	{
 		$form = new Form();
 		$form->addInteger(self::QUANTITY, 'Quantity')
-			->setRequired();
+			->setRequired()
+			->setDefaultValue(1);
 		$form->addSelect(self::ITEM, 'Item')
-			->setItems([self::ITEM_A => 'A', self::ITEM_B => 'B'])
+			->setItems(
+				Arrays::mapKeysFromValues(
+					$this->itemRepository->findAll(),
+					fn(Item $item): array => [
+						$item->getId(),
+						sprintf('Item %s (%s)', $item->getId(), $item->getPrice()),
+					]
+				)
+			)
 			->setRequired();
 		$form->addSubmit('order', 'Order now');
 		return $form;

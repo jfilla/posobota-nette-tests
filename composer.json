@@ -19,11 +19,16 @@
     "nette/utils": "^3.0",
     "latte/latte": "^2.5",
     "tracy/tracy": "^2.6",
-    "wavevision/props-control": "^5.0"
+    "wavevision/props-control": "^5.0",
+    "nettrine/orm": "v0.5.0",
+    "contributte/console": "^0.8.0",
+    "doctrine/common": "^2.10",
+    "brick/money": "^0.5.0"
   },
   "require-dev": {
     "wavevision/coding-standard": "^5.2",
-    "wavevision/di-service-annotation": "^4.0"
+    "wavevision/di-service-annotation": "^4.0",
+    "wavevision/development-utils": "^1.2"
   },
   "autoload": {
     "psr-4": {

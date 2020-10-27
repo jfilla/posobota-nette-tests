@@ -1,0 +1,24 @@
+extensions:
+	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+	nettrine.orm: Nettrine\ORM\DI\OrmExtension
+	nettrine.orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+	nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension(%consoleMode%)
+	nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+	nettrine.cache: Nettrine\Cache\DI\CacheExtension
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+nettrine.dbal:
+	debug:
+		panel: %debugMode%
+	connection:
+		charset: utf8mb4
+		driver: mysqli
+		host: %database.host%
+		user: %database.user%
+		password: %database.password%
+		dbname: %database.name%
+
+nettrine.orm:
+	entityManagerDecoratorClass: App\Models\Doctrine\EntityManager
+nettrine.orm.annotations:
+	paths:
+	   - %vendorDir%/../app/Entities
