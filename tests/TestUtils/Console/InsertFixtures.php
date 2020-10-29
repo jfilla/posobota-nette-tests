@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace App\Console;
+namespace AppTests\TestUtils\Console;
 
-use App\Entities\Item;
 use App\Models\Doctrine\InjectEntityManager;
+use AppTests\TestUtils\Fixtures\InjectItemFixtures;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,8 +16,9 @@ class InsertFixtures extends Command
 {
 
 	use InjectEntityManager;
+	use InjectItemFixtures;
 
-	public const NAME = 'app:insert-fixtures';
+	public const NAME = 'tests:insert-fixtures';
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint
@@ -32,19 +33,10 @@ class InsertFixtures extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
-		$this->item(Item::ID_A, '1000');
-		$this->item(Item::ID_B, '100');
+		$this->itemFixtures->createItemA();
+		$this->itemFixtures->createItemB();
 		$this->entityManager->flush();
 		return 0;
-	}
-
-	private function item(string $id, string $price): void
-	{
-		$item = new Item();
-		$item
-			->setId($id)
-			->setPrice($price);
-		$this->entityManager->persist($item);
 	}
 
 }

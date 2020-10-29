@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-use App\Bootstrap;
+use AppTests\Bootstrap;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Wavevision\NetteTests\Configuration;
 

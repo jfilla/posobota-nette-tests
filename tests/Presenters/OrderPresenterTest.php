@@ -2,7 +2,6 @@
 
 namespace AppTests\Presenters;
 
-use App\Entities\Order;
 use App\Presenters\OrderPresenter;
 use Wavevision\NetteTests\Runners\PresenterRequest;
 use Wavevision\NetteTests\TestCases\PresenterTestCase;

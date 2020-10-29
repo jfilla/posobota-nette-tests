@@ -2,4 +2,5 @@
 !.idea/codeStyles/codeStyleConfig.xml
 !.idea/codeStyles/Project.xml
 /app/config/local.neon
+/tests/config/local.neon
 /vendor

@@ -20,6 +20,9 @@ class CreateOrder
 
 	public function process(int $quantity, Item $item): Order
 	{
+		if ($quantity === 42) {
+			throw new ForbiddenQuantity();
+		}
 		$order = new Order();
 		$this->entityManager->persist($order);
 		$order

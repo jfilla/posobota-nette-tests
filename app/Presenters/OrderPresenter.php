@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use App\Models\InjectCalculator;
 use App\Models\InjectOrderRepository;
+use DateTime;
 use Nette\Bridges\ApplicationLatte\Template;
 use function sprintf;
 
@@ -23,7 +24,7 @@ final class OrderPresenter extends BasePresenter
 			[
 				'item' => sprintf('%s x Item %s', $order->getQuantity(), $order->getItem()->getId()),
 				'price' => $this->calculator->calculate($order->getQuantity(), $order->getItem())->formatTo('cs'),
-				'date' => $order->getDate()->format(\DateTime::ISO8601),
+				'date' => $order->getDate()->format(DateTime::ISO8601),
 			]
 		);
 	}

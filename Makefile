@@ -12,6 +12,7 @@ testConsole=tests/bin/console
 tests=tests
 dirs:=$(src) $(tests)
 config=app/config/local.neon
+testConfig=tests/config/local.neon
 
 all:
 	 @$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -20,8 +21,7 @@ all:
 
 init: build
 	cp -n $(configExample) $(config)
-	#cp -n $(configExample) tests/config/local.neon
-	@echo "update configuration file $(config) then run 'make setup'"
+	@echo "Update configuration file $(config) then run 'make setup'."
 
 setup: database-reset
 
@@ -71,8 +71,14 @@ qa: check-syntax phpcbf phpcs phpstan
 
 # Tests
 
+test-init:
+	cp -n $(configExample) $(testConfig)
+	@echo "Update configuration file $(testConfig) then run 'make test-setup'."
+
+test-setup: test-reset test
+
 test-database-create:
-	$(bin)/create-database tests/config/local.neon
+	$(bin)/create-database $(testConfig)
 
 test-database-schema:
 	$(testConsole) orm:schema-tool:create
@@ -82,7 +88,7 @@ test-database-fixtures:
 
 test-database-reset: test-database-create test-database-schema test-database-fixtures
 
-test-reset: test-database-reset test
+test-reset: test-database-reset
 
 test:
 	$(bin)/phpunit
@@ -97,4 +103,4 @@ else
 	google-chrome $(coverage)/index.html
 endif
 
-ci: build yarn-ci phpcs phpstan test-database-schema test-database-fixtures test
+fix: qa test-reset test
