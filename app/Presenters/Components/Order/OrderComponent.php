@@ -17,9 +17,4 @@ trait OrderComponent
 		return $this->orderControlFactory->create();
 	}
 
-	protected function attachComponentOrder(Control $component): void
-	{
-		$this->addComponent($component, 'order');
-	}
-
 }

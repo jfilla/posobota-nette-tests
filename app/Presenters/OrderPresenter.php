@@ -22,7 +22,8 @@ final class OrderPresenter extends BasePresenter
 		$this->template->setParameters(
 			[
 				'item' => sprintf('%s x Item %s', $order->getQuantity(), $order->getItem()->getId()),
-				'price' => $this->calculator->calculate($order->getQuantity(), $order->getItem()),
+				'price' => $this->calculator->calculate($order->getQuantity(), $order->getItem())->formatTo('cs'),
+				'date' => $order->getDate()->format(\DateTime::ISO8601),
 			]
 		);
 	}

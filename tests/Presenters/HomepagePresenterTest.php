@@ -15,7 +15,7 @@ class HomepagePresenterTest extends PresenterTestCase
 	public function testDefaultRender(): void
 	{
 		$this->assertStringContainsString(
-			'Item e-shop',
+			'Buy item',
 			$this->extractTextResponseContent(
 				$this->runPresenter(new PresenterRequest(HomepagePresenter::class))
 			)
