@@ -13,7 +13,47 @@ class CalculatorTest extends UnitTestCase
 	public function testCalculate(): void
 	{
 		$calculator = new Calculator(0);
-		$this->assertEquals(Money::of('10', 'CZK'), $calculator->calculate(1, (new Item())->setPrice('10')));
+		$this->checkCalculator(
+			$calculator,
+			'10',
+			1,
+			'10'
+		);
+		$this->checkCalculator(
+			$calculator,
+			'20',
+			2,
+			'10'
+		);
+	}
+
+	public function testCalculate2(): void
+	{
+		$calculator = new Calculator(-1);
+		$this->checkCalculator(
+			$calculator,
+			'10',
+			1,
+			'10'
+		);
+		$this->checkCalculator(
+			$calculator,
+			'10',
+			2,
+			'10'
+		);
+	}
+
+	private function checkCalculator(
+		Calculator $calculator,
+		string $expectedPrice,
+		int $quantity,
+		string $unitPrice
+	): void {
+		$this->assertEquals(
+			Money::of($expectedPrice, 'CZK'),
+			$calculator->calculate($quantity, (new Item())->setPrice($unitPrice))
+		);
 	}
 
 }

@@ -9,6 +9,8 @@ services:
 	  inject: true
 	- factory: App\Models\ItemRepository
 	  inject: true
+	- factory: App\Models\OrderFactory
+	  inject: true
 	- factory: App\Models\OrderRepository
 	  inject: true
 	- implement: App\Presenters\Components\Order\ControlFactory

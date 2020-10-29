@@ -15,16 +15,16 @@ use Wavevision\DIServiceAnnotation\DIService;
 class CreateOrder
 {
 
-	use SmartObject;
 	use InjectEntityManager;
+	use InjectOrderFactory;
+	use SmartObject;
 
 	public function process(int $quantity, Item $item): Order
 	{
 		if ($quantity === 42) {
 			throw new ForbiddenQuantity();
 		}
-		$order = new Order();
-		$this->entityManager->persist($order);
+		$order = $this->orderFactory->create();
 		$order
 			->setQuantity($quantity)
 			->setDate(new DateTime())
