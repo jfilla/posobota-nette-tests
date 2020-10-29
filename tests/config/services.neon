@@ -4,3 +4,6 @@ services:
 	  inject: true
 	- factory: AppTests\TestUtils\Fixtures\ItemFixtures
 	  inject: true
+	jokeApi:
+	  factory: AppTests\TestUtils\Mocks\JokeApiMock
+	  inject: true

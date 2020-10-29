@@ -7,7 +7,12 @@ services:
 	  inject: true
 	- factory: App\Models\CreateOrder
 	  inject: true
+	- factory: App\Models\GetJoke
+	  inject: true
 	- factory: App\Models\ItemRepository
+	  inject: true
+	jokeApi:
+	  factory: App\Models\JokeApi
 	  inject: true
 	- factory: App\Models\OrderFactory
 	  inject: true

@@ -5,12 +5,8 @@ namespace App\Presenters;
 use App\Models\InjectCalculator;
 use App\Models\InjectOrderRepository;
 use DateTime;
-use Nette\Bridges\ApplicationLatte\Template;
 use function sprintf;
 
-/**
- * @property Template $template
- */
 final class OrderPresenter extends BasePresenter
 {
 
