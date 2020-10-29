@@ -2,13 +2,13 @@
 
 namespace App\Presenters\Components\Order;
 
-use App\Models\InjectCalculator;
+use App\Entities\Order;
+use App\Models\InjectCreateOrder;
 use App\Models\InjectItemRepository;
 use Nette\Forms\Form;
 use Nette\SmartObject;
 use Nette\Utils\ArrayHash;
 use Wavevision\DIServiceAnnotation\DIService;
-use function bdump;
 
 /**
  * @DIService(generateInject=true)
@@ -16,18 +16,18 @@ use function bdump;
 class FormHandler
 {
 
-	use SmartObject;
-	use InjectCalculator;
+	use InjectCreateOrder;
 	use InjectItemRepository;
+	use SmartObject;
 
-	public function process(Form $form): void
+	public function process(Form $form): Order
 	{
 		/** @var ArrayHash $values */
 		$values = $form->getValues();
-		$item = $this->itemRepository->findById($values[FormFactory::ITEM]);
-		$money = $this->calculator->calculate($values[FormFactory::QUANTITY], $item);
-		bdump($money);
-		bdump($money->formatTo('cs'));
+		return $this->createOrder->process(
+			$values[FormFactory::QUANTITY],
+			$this->itemRepository->findById($values[FormFactory::ITEM])
+		);
 	}
 
 }

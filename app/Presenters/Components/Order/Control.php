@@ -24,8 +24,8 @@ class Control extends BaseControl
 	{
 		$form = $this->formFactory->create();
 		$form->onSuccess[] = function (\Nette\Forms\Form $form): void {
-			$this->formHandler->process($form);
-			$this->redirect('this');
+			$order = $this->formHandler->process($form);
+			$this->presenter->redirect('Order:', ['id' => $order->getId()]);
 		};
 		return $form;
 	}

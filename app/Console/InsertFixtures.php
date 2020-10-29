@@ -32,8 +32,8 @@ class InsertFixtures extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
-		$this->item(Item::ID_A, '42.03');
-		$this->item(Item::ID_B, '3.14');
+		$this->item(Item::ID_A, '100');
+		$this->item(Item::ID_B, '10');
 		$this->entityManager->flush();
 		return 0;
 	}
