@@ -14,9 +14,10 @@ class JokePresenterTest extends PresenterTestCase
 
 	public function testDefault(): void
 	{
-		$this->jokeApiMock->setResponse('mocked joke');
+		$mockedJoke = 'mocked joke';
+		$this->jokeApiMock->setResponse($mockedJoke);
 		$this->assertStringContainsString(
-			'mocked joke',
+			$mockedJoke,
 			$this->extractTextResponseContent(
 				$this->runPresenter(new PresenterRequest(JokePresenter::class))
 			)
