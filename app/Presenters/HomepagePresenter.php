@@ -3,9 +3,8 @@
 namespace App\Presenters;
 
 use App\Presenters\Components\Order\OrderComponent;
-use Nette;
 
-final class HomepagePresenter extends Nette\Application\UI\Presenter
+final class HomepagePresenter extends BasePresenter
 {
 
 	use OrderComponent;
