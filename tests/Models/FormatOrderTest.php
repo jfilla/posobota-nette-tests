@@ -19,7 +19,7 @@ class FormatOrderTest extends DIContainerTestCase
 		$order = $this->orderFixtures->createOrder();
 		$this->entityManager->flush();
 		$formattedOrder = $this->formatOrder->process($order);
-		$this->assertStringContainsString('1 x Item a', $formattedOrder['item']);
+		$this->assertEquals('1 x Item a', $formattedOrder['item']);
 	}
 
 }

@@ -51,8 +51,6 @@ database-fixtures:
 
 database-reset: reset database-create database-schema database-fixtures
 
-fix: reset check-syntax phpcbf phpcs phpstan test
-
 # QA
 
 check-syntax:
