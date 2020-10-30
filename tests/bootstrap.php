@@ -5,5 +5,4 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Wavevision\NetteTests\Configuration;
 
 require __DIR__ . '/../vendor/autoload.php';
-AnnotationRegistry::registerLoader('class_exists');
 Configuration::setup([Bootstrap::class, 'boot']);
