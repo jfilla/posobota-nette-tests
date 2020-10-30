@@ -3,4 +3,4 @@ parameters:
         host: localhost
         name: posobota_nette
         user: root
-        password: root
+        password: password
