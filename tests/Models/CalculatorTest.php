@@ -10,41 +10,24 @@ use Brick\Money\Money;
 class CalculatorTest extends UnitTestCase
 {
 
-	public function testCalculate(): void
+	public function testCalculateQuantityCoe(): void
 	{
-		$calculator = new Calculator(0);
-		$this->checkCalculator(
-			$calculator,
-			'10',
-			1,
-			'10'
-		);
-		$this->checkCalculator(
-			$calculator,
-			'20',
-			2,
-			'10'
-		);
+		$this->checkAll(0, [['10', 1, '10'], ['20', 2, '10']]);
+		$this->checkAll(-1, [['10', 1, '10'], ['10', 2, '10']]);
 	}
 
-	public function testCalculate2(): void
+	/**
+	 * @param array<mixed> $items
+	 */
+	private function checkAll(int $quantityCoefficient, array $items): void
 	{
-		$calculator = new Calculator(-1);
-		$this->checkCalculator(
-			$calculator,
-			'10',
-			1,
-			'10'
-		);
-		$this->checkCalculator(
-			$calculator,
-			'10',
-			2,
-			'10'
-		);
+		$calculator = new Calculator($quantityCoefficient);
+		foreach ($items as $item) {
+			$this->check($calculator, ...$item);
+		}
 	}
 
-	private function checkCalculator(
+	private function check(
 		Calculator $calculator,
 		string $expectedPrice,
 		int $quantity,
