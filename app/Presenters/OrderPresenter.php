@@ -2,26 +2,19 @@
 
 namespace App\Presenters;
 
-use App\Models\InjectCalculator;
+use App\Models\InjectFormatOrder;
 use App\Models\InjectOrderRepository;
-use DateTime;
-use function sprintf;
 
 final class OrderPresenter extends BasePresenter
 {
 
 	use InjectOrderRepository;
-	use InjectCalculator;
+	use InjectFormatOrder;
 
 	public function actionDefault(int $id): void
 	{
-		$order = $this->orderRepository->findById($id);
 		$this->template->setParameters(
-			[
-				'item' => sprintf('%s x Item %s', $order->getQuantity(), $order->getItem()->getId()),
-				'price' => $this->calculator->calculate($order->getQuantity(), $order->getItem())->formatTo('cs'),
-				'date' => $order->getDate()->format(DateTime::ISO8601),
-			]
+			$this->formatOrder->process($this->orderRepository->findById($id))
 		);
 	}
 
