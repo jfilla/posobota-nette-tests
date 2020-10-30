@@ -21,10 +21,10 @@ class CreateOrder
 
 	public function process(int $quantity, Item $item): Order
 	{
+		$order = $this->orderFactory->create();
 		if ($quantity === 42) {
 			throw new ForbiddenQuantity();
 		}
-		$order = $this->orderFactory->create();
 		$order
 			->setQuantity($quantity)
 			->setDate(new DateTime())
