@@ -16,7 +16,7 @@ class JokeApi
 
 	public function get(): string
 	{
-		return FileSystem::read('https://sv443.net/jokeapi/v2/joke/Any');
+		return FileSystem::read('https://sv443.net/jokeapi/v2/joke/Programming');
 	}
 
 }
