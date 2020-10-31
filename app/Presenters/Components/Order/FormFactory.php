@@ -44,7 +44,7 @@ class FormFactory
 				)
 			)
 			->setRequired();
-		$form->addSubmit('order', 'Order now');
+		$form->addSubmit('order', 'Order');
 		return $form;
 	}
 

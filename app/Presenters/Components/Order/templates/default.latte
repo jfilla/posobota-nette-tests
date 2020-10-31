@@ -1,4 +1,10 @@
 <h1>Buy item</h1>
-
-
-{control form}
+<form n:name="form">
+    <div class="form-group">
+        <label n:name="quantity"/>
+        <input class="form-control" n:name="quantity">
+        <label n:name="item"/>
+        <select class="form-control" n:name="item"></select>
+        <input class="btn btn-primary" n:name="order">
+    </div>
+</form>
